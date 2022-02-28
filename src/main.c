@@ -48,20 +48,17 @@ char	*open_read(char *file)
 
 int main(int ac, char **av)
 {
-    char    **tab; 
-    //int     *cols;
-    char    *buf;
-	//t_s     p;
+        char    **tab; 
+        char    *buf;
+        //t_s     p;
 
-	if (ac != 2)
-		return (1);
-	//p.buf = NULL;
-
-    buf = NULL;
-	buf = ft_strdup(open_read(av[1]));
-    tab = str_to_tab(buf, "\n:");
-    //cols = count_cols(buf, "\n:");
-    for (int i = 0; i < count_rows(buf, "\n:"); i++)
-            printf("tab[%d] = %s\n", i, tab[i]);
-	return (0);
+        if (ac != 2)
+                return (1);
+        //p.buf = NULL;
+        buf = NULL;
+        buf = ft_strdup(open_read(av[1]));
+        tab = str_to_tab(buf, "\n:");
+        for (int i = 0; i < count_rows(buf, "\n:"); i++)
+                printf("tab[%d] = %s\n", i, tab[i]);
+        return (0);
 }

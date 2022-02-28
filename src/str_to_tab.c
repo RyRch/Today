@@ -27,7 +27,7 @@ int	count_rows(char *str, char *charset)
 				rows++;
 		i++;
 	}
-	return (rows - 1);
+	return (rows);
 }
 
 int	*count_cols(char *str, char *charset)
