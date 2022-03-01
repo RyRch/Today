@@ -1,7 +1,9 @@
 DIR	=	src
 
 SRC	=	$(DIR)/main.c\
-		$(DIR)/str_to_tab.c
+		$(DIR)/str_to_arr.c\
+		$(DIR)/option.c\
+		$(DIR)/util.c
 
 BIN	=	todo
 
