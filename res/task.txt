@@ -1,7 +1,7 @@
-1:code my todo app in C
-0:read one book a week
-0:do all my prayers
-0:50 pushups a day
-0:buy a new desk
-0:buy a monitor arm
-0:buy a vertical stand
+1.0:code my todo app in C
+0.1:read one book a week
+0.2:do all my prayers
+0.3:50 pushups a day
+0.4:buy a new desk
+0.5:buy a monitor arm
+0.6:buy a vertical stand

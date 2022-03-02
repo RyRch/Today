@@ -18,28 +18,40 @@ char	*open_read(char *file)
         return (bufp);
 }
 
-void    print_arr(t_s *p, char *buf)    
+void    print_arr(char **arr) 
 {
-        for (int i = 0; i < count_rows(buf, "\n:"); i++)
-                printf("arr[%d] = %s\n", i, p->arr[i]);
+        for (int i = 0; arr[i] != NULL; i++) {
+                printf("arr[%d] = %s\n", i, arr[i]);
+        }
 }
 
 int main(int ac, char **av)
 {
+        char    **arr;
         char    *buf;
-        t_s     p;
+        //t_s     p;
 
-        if (!is_option(ac, av)) {
+        if (ac > 4)
+                return 1;
+        if (ac <= 2) {
+                arr = NULL;
+                buf = NULL;
+                if (ac == 2)
+                        buf = ft_strdup(open_read(av[1]));
+                else
+                        buf = ft_strdup(open_read("./res/task.txt"));
+                if (buf == NULL)
+                        write(2, "Not a file !\n", 13);
+                else
+                        arr = str_to_tab(buf, "\n:");
+                print_arr(arr);
+        }
+        buf = NULL;
+        buf = ft_strdup(open_read("./res/task.txt"));
+        if (!is_option(ac, av, buf) && ac > 2) {
                 write(2, "Wrong option !\n", 14);
                 return 1;
         }
-        buf = NULL;
-        buf = ft_strdup(open_read(av[1]));
-        if (buf == NULL)
-                write(2, "Not a file !\n", 13);
-        else
-                p.arr = str_to_tab(buf, "\n:");
-        if (ac == 2)
-                print_arr(&p, buf);
+        free(buf);
         return (0);
 }

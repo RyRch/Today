@@ -21,7 +21,8 @@ int     ft_strlen(char *str);
 char    *ft_strdup(char *src);
 bool    ft_strcmp(char *s1, char *s2);
 bool    is_num(char *str);
-bool    is_option(int ac, char **av);
-void    print_arr(t_s *p, char *buf);
+bool    is_option(int ac, char **av, char *buf);
+void    print_arr(char **arr);
+char    *ft_strcpy(char *dest, char *src);
 
 #endif

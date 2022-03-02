@@ -10,20 +10,22 @@ int	ft_strlen(char *str)
         return (i);
 }
 
+char    *ft_strcpy(char *dest, char *src)
+{
+        for (int i = 0; src[i]; i++)
+                dest[i] = src[i];
+        dest[ft_strlen(src)] = '\0';
+        return (dest);
+}
+
 char    *ft_strdup(char *src)
 {
         char	*new;
-        int		i;
 
-        i = 0;
         new = malloc(sizeof(char) * ft_strlen(src) + 1);
         if (new == NULL)
                 return (NULL);
-        while (src[i]) {
-                new[i] = src[i];
-                i++;
-        }
-        new[i] = '\0';
+        ft_strcpy(new, src);
         return (new);
 }
 

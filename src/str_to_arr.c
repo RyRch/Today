@@ -74,7 +74,7 @@ char	**str_to_tab(char *str, char *charset)
         if (cols == 0 || rows == 0)
                 return (NULL);
         tab = NULL;
-        tab = malloc(sizeof(char *) * rows);
+        tab = malloc(sizeof(char *) * rows + 1);
         if (tab == NULL)
                 return (NULL);
         while (y < rows) {
@@ -92,5 +92,6 @@ char	**str_to_tab(char *str, char *charset)
                 x = 0;
                 y++;
         }
+        tab[y] = NULL;
         return (tab);
 }
