@@ -1,4 +1,4 @@
-#include "../icl/icl.h"
+#include "../icl/proto.h"
 
 char *ft_strcat(char *dest, char *src)
 {

@@ -1,4 +1,4 @@
-#include "../icl/icl.h"
+#include "../icl/proto.h"
 
 bool    is_num(char *str)
 {

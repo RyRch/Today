@@ -1,4 +1,4 @@
-#include "../icl/icl.h"
+#include "../icl/proto.h"
 
 bool ft_strcmp(char *s1, char *s2)
 {

@@ -1,4 +1,4 @@
-#include "../icl/icl.h"
+#include "../icl/proto.h"
 
 char	*open_read(char *file)
 {
@@ -17,17 +17,18 @@ char	*open_read(char *file)
         return (bufp);
 }
 
-void    print_arr(char **arr, char *buf, char *charset) 
+void    print_arr(char **arr) 
 {
-        int *cols = count_cols(buf, charset);
         int check = 0;
+        int len = 0;
 
-        for (int y = 0; y < count_rows(buf, charset); y++) {
-                for (int x = 0; x < cols[y]; x++) {
+        for (int y = 0; arr[y] != NULL; y++) {
+                len = ft_strlen(arr[y]);
+                for (int x = 0; x < len; x++) {
                         if (y % 2 == 0) {
                                 if (x >= 2)
                                         printf("%c", arr[y][x]);
-                                if (x + 1 >= cols[y])
+                                if (x + 1 >= len)
                                         check = 1;
                                 if (arr[y][0] == '0' && check == 1)
                                         printf(" -   ");
@@ -43,14 +44,12 @@ void    print_arr(char **arr, char *buf, char *charset)
                 check = 0; 
                 free(arr[y]);
         }
-        free(cols);
 }
 
 int main(int ac, char **av)
 {
         char    **arr;
         char    *buf;
-        //t_s     p;
 
         if (ac > 4)
                 return 1;
@@ -63,7 +62,7 @@ int main(int ac, char **av)
                         write(2, "Not a file !\n", 13);
                 else
                         arr = str_to_tab(buf, "\n:");
-                print_arr(arr, buf, ":\n");
+                print_arr(arr);
                 free(buf);
                 return (0);
         }
