@@ -5,14 +5,14 @@ int	ft_strlen(char *str)
         int i;
 
         i = 0;
-        while (str[i])
+        while (str[i] != '\0')
                 i++;
         return (i);
 }
 
 char    *ft_strcpy(char *dest, char *src)
 {
-        for (int i = 0; src[i]; i++)
+        for (int i = 0; src[i] != '\0'; i++)
                 dest[i] = src[i];
         dest[ft_strlen(src)] = '\0';
         return (dest);
@@ -22,6 +22,7 @@ char    *ft_strdup(char *src)
 {
         char	*new;
 
+        new = 0;
         new = malloc(sizeof(char) * ft_strlen(src) + 1);
         if (new == NULL)
                 return (NULL);
@@ -31,7 +32,7 @@ char    *ft_strdup(char *src)
 
 bool ft_strcmp(char *s1, char *s2)
 {
-        for (int i = 0; s1[i]; i++) {
+        for (int i = 0; s1[i] != '\0'; i++) {
                 if (s1[i] != s2[i])
                         return false;
         }
@@ -40,7 +41,7 @@ bool ft_strcmp(char *s1, char *s2)
 
 bool    is_num(char *str)
 {
-        for (int i = 0; str[i]; i++) {
+        for (int i = 0; str[i] != '\0'; i++) {
                 if (str[i] < '0' && str[i] > '9')
                         return false;
         }

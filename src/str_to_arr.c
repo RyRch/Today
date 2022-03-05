@@ -2,24 +2,18 @@
 
 bool    is_charset(char c, char *str)
 {
-        int i;
-
-        i = 0;
-        while (str[i] != '\0') {
+        for (int i = 0; str[i] != '\0'; i++) {
                 if (c == str[i])
                         return (true);
-                i++;
         }
         return (false);
 }
 
 int	count_rows(char *str, char *charset)
 {
-        int	i;
-        int	rows;
+        int	i = 0;
+        int	rows = 0;
 
-        rows = 0;
-        i = 0;
         while (str[i] != '\0') {
                 if (is_charset(str[i], charset))
                         rows++;
@@ -30,15 +24,12 @@ int	count_rows(char *str, char *charset)
 
 int	*count_cols(char *str, char *charset)
 {
-        int	i;
-        int	y;
-        int u;
+        int	i = 0;
+        int	y = 0;
+        int u = 0;
         int	rows;
         int *cols;
 
-        i = 0;
-        y = 0;
-        u = 0;
         rows = count_rows(str, charset);
         if (rows == 0)
                 return (0);
@@ -59,22 +50,18 @@ int	*count_cols(char *str, char *charset)
 
 char	**str_to_tab(char *str, char *charset)
 {
-        int		x;
-        int		y;
-        int		i;
+        int		x = 0;
+        int		y = 0;
+        int		i = 0;
         int		rows;
         int		*cols;
         char	**tab;
 
-        i = 0;
-        x = 0;
-        y = 0;
         rows = count_rows(str, charset);
         cols = count_cols(str, charset);
         if (cols == 0 || rows == 0)
                 return (NULL);
-        tab = NULL;
-        tab = malloc(sizeof(char *) * rows + 1);
+        tab = malloc(sizeof(char *) * rows);
         if (tab == NULL)
                 return (NULL);
         while (y < rows) {
@@ -92,6 +79,6 @@ char	**str_to_tab(char *str, char *charset)
                 x = 0;
                 y++;
         }
-        tab[y] = NULL;
+        free(cols);
         return (tab);
 }

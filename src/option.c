@@ -12,7 +12,7 @@ void    begin_opt(char *file, char *id)
                 if (y % 2 == 0 && arr[y][2] == id[0])
                         arr[y][0] = '1';
         }
-        print_arr(arr);
+        print_arr(arr, file, "\n:");
 }
 
 void    check_opt(char *file, char *id)
@@ -27,7 +27,7 @@ void    check_opt(char *file, char *id)
                 if (y % 2 == 0 && arr[y][2] == id[0])
                         arr[y][0] = '2';
         }
-        print_arr(arr);
+       print_arr(arr, file, "\n:");
 }
 
 void    edit_opt(char *file, char *id, char *new)
@@ -42,7 +42,7 @@ void    edit_opt(char *file, char *id, char *new)
                 if (y % 2 == 0 && arr[y][2] == id[0])
                         arr[y + 1] = ft_strdup(new);
         }
-        print_arr(arr);
+        print_arr(arr, file, "\n:");
 }
 
 bool    is_option(int ac, char **av, char *buf)

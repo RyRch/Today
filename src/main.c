@@ -2,7 +2,7 @@
 
 char	*open_read(char *file)
 {
-        char	buf[BUFSIZ];
+        char	buf[BUFSIZ] = {0};
         char	*bufp;
         int		r; 
         int		fd;
@@ -12,17 +12,41 @@ char	*open_read(char *file)
         if (fd == -1)
                 return (NULL);
         r = read(fd, buf, BUFSIZ);
-        bufp = ft_strdup(buf);
         if (r <= 0)
                 return (NULL);
+        bufp = ft_strdup(buf);
         return (bufp);
 }
 
-void    print_arr(char **arr) 
+void    print_arr(char **arr, char *buf, char *charset) 
 {
-        for (int i = 0; arr[i] != NULL; i++) {
-                printf("arr[%d] = %s\n", i, arr[i]);
+        int y;
+        int x;
+        int *cols = count_cols(buf, charset);
+        int check = 0;
+
+        for (y = 0; y < count_rows(buf, charset); y++) {
+                for (x = 0; x < cols[y]; x++) {
+                        if (y % 2 == 0) {
+                                if (x >= 2)
+                                        printf("%c", arr[y][x]);
+                                if (x + 1 >= cols[y])
+                                        check = 1;
+                                if (arr[y][0] == '0' && check == 1)
+                                        printf(" -   ");
+                                if (arr[y][0] == '1' && check == 1)
+                                        printf(" -   ");
+                                if (arr[y][0] == '2' && check == 1)
+                                        printf(" -   ");
+                        } else
+                                printf("%c", arr[y][x]);
+                } 
+                if (y % 2 != 0)
+                        printf("\n");
+                check = 0; 
+                free(arr[y]);
         }
+        free(cols);
 }
 
 int main(int ac, char **av)
@@ -34,20 +58,19 @@ int main(int ac, char **av)
         if (ac > 4)
                 return 1;
         if (ac <= 2) {
-                arr = NULL;
-                buf = NULL;
                 if (ac == 2)
-                        buf = ft_strdup(open_read(av[1]));
+                        buf = open_read(av[1]);
                 else
-                        buf = ft_strdup(open_read("./res/task.txt"));
+                        buf = open_read("./res/task.txt");
                 if (buf == NULL)
                         write(2, "Not a file !\n", 13);
                 else
                         arr = str_to_tab(buf, "\n:");
-                print_arr(arr);
+                print_arr(arr, buf, ":\n");
+                free(buf);
+                return (0);
         }
-        buf = NULL;
-        buf = ft_strdup(open_read("./res/task.txt"));
+        buf = open_read("./res/task.txt");
         if (!is_option(ac, av, buf) && ac > 2) {
                 write(2, "Wrong option !\n", 14);
                 return 1;

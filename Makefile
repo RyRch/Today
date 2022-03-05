@@ -15,7 +15,7 @@ fclean:	clean
 	$(RM) $(BIN)
 
 valgrind:
-	valgrind ./$(BIN) res/task.txt
+	valgrind ./$(BIN)
 
 re: fclean all
 
