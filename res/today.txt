@@ -1,0 +1,15 @@
+0.1:tab_to_str function
+0.2:libmy.a for all my utils
+0.3:multiples id calls for my options
+0.4:for the edit option you can edit the status
+0.5:refactor the code to know if a struct is gud
+0.6:learn like REALLY learn linked lists
+0.7:implement LS for adding and delete opt
+0.8:title is a great idea
+0.9:note is also a great idea
+0.10:priority is also a GI
+0.11:percentage or like [1/10]
+0.12:indent for sub projects
+0.13:find good naming
+0.14:mybe forget all because the app is simple bruv !
+0.15:MAKEFILE CUSTOM bby !!!

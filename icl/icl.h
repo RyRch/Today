@@ -26,5 +26,7 @@ bool    is_num(char *str);
 bool    is_option(int ac, char **av, char *buf);
 void    print_arr(char **arr, char *buf, char *charset);
 char    *ft_strcpy(char *dest, char *src);
+char    *ft_strcat(char *dest, char *src);
+char    *tab_to_str(char **arr);
 
 #endif

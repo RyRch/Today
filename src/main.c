@@ -3,11 +3,10 @@
 char	*open_read(char *file)
 {
         char	buf[BUFSIZ] = {0};
-        char	*bufp;
+        char	*bufp = NULL;
         int		r; 
         int		fd;
 
-        bufp = NULL;
         fd = open(file, O_RDONLY);
         if (fd == -1)
                 return (NULL);
@@ -20,13 +19,11 @@ char	*open_read(char *file)
 
 void    print_arr(char **arr, char *buf, char *charset) 
 {
-        int y;
-        int x;
         int *cols = count_cols(buf, charset);
         int check = 0;
 
-        for (y = 0; y < count_rows(buf, charset); y++) {
-                for (x = 0; x < cols[y]; x++) {
+        for (int y = 0; y < count_rows(buf, charset); y++) {
+                for (int x = 0; x < cols[y]; x++) {
                         if (y % 2 == 0) {
                                 if (x >= 2)
                                         printf("%c", arr[y][x]);

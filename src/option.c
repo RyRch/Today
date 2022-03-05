@@ -2,47 +2,50 @@
 
 void    begin_opt(char *file, char *id)
 {
-        char    **arr;
+        char    **arr = NULL;
+        char    *str = NULL;
         char    charset[3];
 
-        arr = NULL;
         ft_strcpy(charset, "\n:");
         arr = str_to_tab(file, charset);
         for (int y = 0; y < count_rows(file, charset); y++) {
                 if (y % 2 == 0 && arr[y][2] == id[0])
                         arr[y][0] = '1';
         }
-        print_arr(arr, file, "\n:");
+        str = tab_to_str(arr);
+        printf("%s", str);
 }
 
 void    check_opt(char *file, char *id)
 {
-        char    **arr;
+        char    **arr = NULL;
+        char    *str = NULL;
         char    charset[3];
 
-        arr = NULL;
         ft_strcpy(charset, "\n:");
         arr = str_to_tab(file, "\n:");
         for (int y = 0; y < count_rows(file, charset); y++) {
                 if (y % 2 == 0 && arr[y][2] == id[0])
                         arr[y][0] = '2';
         }
-       print_arr(arr, file, "\n:");
+        str = tab_to_str(arr);
+        printf("%s", str);
 }
 
 void    edit_opt(char *file, char *id, char *new)
 {
-        char    **arr;
+        char    **arr = NULL;
+        char    *str = NULL;
         char    charset[3];
 
-        arr = NULL;
         ft_strcpy(charset, "\n:");
         arr = str_to_tab(file, "\n:");
         for (int y = 0; y < count_rows(file, charset); y++) {
                 if (y % 2 == 0 && arr[y][2] == id[0])
                         arr[y + 1] = ft_strdup(new);
         }
-        print_arr(arr, file, "\n:");
+        str = tab_to_str(arr);
+        printf("%s", str);
 }
 
 bool    is_option(int ac, char **av, char *buf)
