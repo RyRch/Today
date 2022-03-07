@@ -7,9 +7,9 @@ LIB =	lib/is_num.c\
 		lib/ft_strcpy.c\
 		lib/ft_strdup.c\
 		lib/ft_strlen.c\
+		lib/ft_strncmp.c\
 		lib/str_to_tab.c\
 		lib/tab_to_str.c
-
 
 NAME =	libmy.a
 

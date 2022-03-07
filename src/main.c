@@ -48,8 +48,8 @@ void    print_arr(char **arr)
 
 int main(int ac, char **av)
 {
-        char    **arr;
-        char    *buf;
+        char    **arr = NULL;
+        char    *buf = NULL;
 
         if (ac > 4)
                 return 1;

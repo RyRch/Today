@@ -21,5 +21,6 @@ void    print_arr(char **arr);
 char    *ft_strcpy(char *dest, char *src);
 char    *ft_strcat(char *dest, char *src);
 char    *tab_to_str(char **arr);
+bool	ft_strncmp(char *s1, char *s2, int n);
 
 #endif

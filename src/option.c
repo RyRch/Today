@@ -73,6 +73,25 @@ void    add_opt(char *file, char *task)
         free(new); 
 }
 
+void	del_opt(char *file, char *id)
+{
+		char	*str = NULL;
+		int		rows = 0;
+		int		index = -1;
+
+		(void)id;
+		str = ft_strdup(file);
+		for (int i = 0; str[i] != '\0'; i++) {
+				if (str[i] == ':' || str[i] == '\n')
+					rows++;
+				if (rows % 2 == 0 && ft_strncmp(&str[i + 2], id, ft_strlen(id))) {
+						index = i;
+						break;
+				}
+		}
+		printf("index = %d\n", index);
+}
+
 bool    is_option(int ac, char **av, char *buf)
 {
         if (ac == 3 && ft_strcmp(av[1], "-a")) {
@@ -88,7 +107,7 @@ bool    is_option(int ac, char **av, char *buf)
                 return true;
         }
         if (ac == 3 && ft_strcmp(av[1], "-d") && is_num(av[2])) {
-                //                       del_opt();
+                del_opt(buf, av[2]);
                 return true;
         }
         if (ac == 4 && ft_strcmp(av[1], "-e") && is_num(av[2])) {
