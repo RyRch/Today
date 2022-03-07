@@ -12,3 +12,5 @@ buy a new desk
 buy a monitor arm
 0.6
 buy a vertical stand
+0.0
+finish my work day

@@ -47,7 +47,6 @@ void    edit_opt(char *file, char *id, char *new)
         char    charset[3];
         int     fd = 0;
 
-        ft_strcpy(charset, "\n:");
         arr = str_to_tab(file, "\n:");
         for (int y = 0; y < count_rows(file, charset); y++) {
                 if (y % 2 == 0 && arr[y][2] == id[0])
