@@ -69,13 +69,14 @@ void    edit_opt(char *file, char *id, char *new)
 {
 		char    **arr = NULL;
 		char    *str = NULL;
-		char    charset[3];
 		int     fd = 0;
 
 		arr = str_to_tab(file, "\n:");
-		for (int y = 0; y < count_rows(file, charset); y++) {
-				if (y % 2 == 0 && arr[y][2] == id[0])
+		for (int y = 0; arr[y] != NULL; y++) {
+				if (ft_strncmp(&arr[y][2], id, ft_strlen(id))) {
 						arr[y + 1] = ft_strdup(new);
+						break;
+				}
 		}
 		str = tab_to_str(arr);
 		free(*arr);
