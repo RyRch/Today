@@ -80,7 +80,7 @@ void    edit_opt(char *file, char *id, char *new)
 		}
 		str = tab_to_str(arr);
 		free(*arr);
-		fd = open("./res/task.txt", O_WRONLY);
+		fd = open("./res/task.txt", O_WRONLY | O_TRUNC);
 		write(fd, str, ft_strlen(str));
 		free(str);
 }
