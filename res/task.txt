@@ -6,11 +6,4 @@ read one book a week
 do all my prayers
 1.3
 50 pushups a day
-0.4
-buy a new desk
-0.5
-buy a monitor arm
-0.6
-buy a vertical stand
-0.0
-finish my work day
+1.

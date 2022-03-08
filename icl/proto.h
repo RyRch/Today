@@ -22,5 +22,6 @@ char    *ft_strcpy(char *dest, char *src);
 char    *ft_strcat(char *dest, char *src);
 char    *tab_to_str(char **arr);
 bool	ft_strncmp(char *s1, char *s2, int n);
+char	*ft_strncpy(char *dest, char *src, int n);
 
 #endif

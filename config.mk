@@ -9,7 +9,8 @@ LIB =	lib/is_num.c\
 		lib/ft_strlen.c\
 		lib/ft_strncmp.c\
 		lib/str_to_tab.c\
-		lib/tab_to_str.c
+		lib/tab_to_str.c\
+		lib/ft_strncpy.c
 
 NAME =	libmy.a
 
@@ -22,3 +23,5 @@ CC	=	gcc
 RM	=	rm -rf
 
 OBJ	=	$(SRC:.c=.o)
+
+LOBJ =	$(LIB:.c=.o)

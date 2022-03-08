@@ -2,9 +2,8 @@ include config.mk
 
 all:	$(NAME) $(BIN) 
 
-$(NAME):
-	$(CC) $(CFLAGS) -c $(LIB)
-	ar rc $(NAME) *.o
+$(NAME): $(LOBJ)
+	ar rc $(NAME) $(LOBJ)
 
 $(BIN):	$(OBJ)
 	$(CC) $(OBJ) $(NAME) $(CFLAGS) -o $(BIN)
@@ -14,7 +13,7 @@ $(BIN):	$(OBJ)
 
 clean:
 	$(RM) $(OBJ)
-	$(RM) *.o
+	$(RM) $(LOBJ)
 
 fclean:	clean
 	$(RM) $(BIN)
