@@ -19,6 +19,11 @@ fclean:	clean
 	$(RM) $(BIN)
 	$(RM) $(NAME)
 
+install: all
+	mkdir /home/rr/.config/today
+	touch /home/rr/.config/today/todayrc
+	echo '0.0:test' > /home/rr/.config/today/todayrc
+
 re: fclean all
 
 .PHONY: all clean fclean re

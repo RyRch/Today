@@ -54,10 +54,7 @@ int main(int ac, char **av)
         if (ac > 4)
                 return 1;
         if (ac <= 2) {
-                if (ac == 2)
-                        buf = open_read(av[1]);
-                else
-                        buf = open_read("./res/task.txt");
+                buf = open_read("/home/rr/.config/today/todayrc");
                 if (buf == NULL)
                         write(2, "Not a file !\n", 13);
                 else
@@ -66,7 +63,7 @@ int main(int ac, char **av)
                 free(buf);
                 return (0);
         }
-        buf = open_read("./res/task.txt");
+        buf = open_read("/home/rr/.config/today/todayrc");
         if (!is_option(ac, av, buf) && ac > 2) {
                 write(2, "Wrong option !\n", 14);
                 return 1;

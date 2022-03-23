@@ -40,7 +40,7 @@ void    begin_opt(char *file, char *id)
 		}
 		str = tab_to_str(arr);
 		free(*arr);
-		fd = open("./res/task.txt", O_WRONLY);
+		fd = open("/home/rr/.config/today/todayrc", O_WRONLY);
 		write(fd, str, ft_strlen(str));
 		free(str);
 }
@@ -60,7 +60,7 @@ void    check_opt(char *file, char *id)
 		}
 		str = tab_to_str(arr);
 		free(*arr);
-		fd = open("./res/task.txt", O_WRONLY);
+		fd = open("/home/rr/.config/today/todayrc", O_WRONLY);
 		write(fd, str, ft_strlen(str));
 		free(str);
 }
@@ -80,7 +80,7 @@ void    edit_opt(char *file, char *id, char *new)
 		}
 		str = tab_to_str(arr);
 		free(*arr);
-		fd = open("./res/task.txt", O_WRONLY | O_TRUNC);
+		fd = open("/home/rr/.config/today/todayrc", O_WRONLY | O_TRUNC);
 		write(fd, str, ft_strlen(str));
 		free(str);
 }
@@ -95,7 +95,7 @@ void    add_opt(char *file, char *task)
 		ft_strcat(new, "0.0\n");
 		ft_strcat(new, task);
 		ft_strcat(new, "\n");
-		fd = open("./res/task.txt", O_WRONLY);
+		fd = open("/home/rr/.config/today/todayrc", O_WRONLY);
 		write(fd, sort_index(new), ft_strlen(new) + 1);
 		free(new); 
 }
@@ -123,7 +123,7 @@ void	del_opt(char *file, char *id)
 		new = ft_strncpy(new, file, index + 2);
 		if (ft_strlen(&file[x]) > 3)
 			ft_strcat(new, &file[x]);
-		fd = open("./res/task.txt", O_WRONLY | O_TRUNC);
+		fd = open("/home/rr/.config/today/todayrc", O_WRONLY | O_TRUNC);
 		write(fd, sort_index(new), ft_strlen(new) + 2);
 		free(new);
 }

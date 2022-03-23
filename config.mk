@@ -14,7 +14,7 @@ LIB =	lib/is_num.c\
 
 NAME =	libmy.a
 
-BIN	=	todo
+BIN	=	today
 
 CFLAGS	+=	-Wall -Werror -Wextra -I./icl -g3
 
