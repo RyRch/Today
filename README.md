@@ -6,11 +6,17 @@
 
 Before running this programm you need to have GCC, make and a [NerdFont ttf](https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md).
 
-For ubuntu : 
+For Ubuntu : 
 
 ```
 sudo apt install gcc make
 ```
+For Arch Linux :
+
+```
+sudo pacman -S gcc make
+```
+
 And run the `install.sh` script with sudo
 
 ```
