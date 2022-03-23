@@ -1,6 +1,6 @@
-# Introduction
+# Screenshot
 
-Today is simple cli todo app for linux users.
+![soon](http://url/to/img.png)
 
 # Requirement
 
