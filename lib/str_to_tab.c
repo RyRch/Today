@@ -33,7 +33,7 @@ int	*count_cols(char *str, char *charset)
         rows = count_rows(str, charset);
         if (rows == 0)
                 return (0);
-        cols = malloc(sizeof(int) * rows);
+        cols = malloc(sizeof(int) * rows + 1);
         if (cols == 0)
                 return (0);
         while (i < rows) {

@@ -1,6 +1,7 @@
 #include "../icl/proto.h"
+#include <stdio.h>
 
-char	*open_read(char *file)
+char	*get_file(char *file)
 {
         char	buf[BUFSIZ] = {0};
         char	*bufp = NULL;
@@ -46,28 +47,38 @@ void    print_arr(char **arr)
         }
 }
 
+void    fill_struct(s_t *s)
+{
+        s->buf = NULL;
+        s->file = NULL;
+        s->file = malloc(sizeof(char) * 1000);
+        ft_strcpy(s->file, getenv("HOME"));
+        ft_strcat(s->file, "/");
+        ft_strcat(s->file, ".today");
+        s->buf = get_file(s->file);
+        s->arr = NULL;
+        s->arr = str_to_tab((char *)s->buf, ":\n");
+}
+
 int main(int ac, char **av)
 {
-        char    **arr = NULL;
-        char    *buf = NULL;
+        p_s     *head = NULL;
+        s_t     s;
 
-        if (ac > 4)
-                return 1;
-        if (ac <= 2) {
-                buf = open_read("/home/rr/.config/today/todayrc");
-                if (buf == NULL)
+        fill_struct(&s);
+        if (ac == 1) {
+                if (s.buf == NULL)
                         write(2, "Not a file !\n", 13);
                 else
-                        arr = str_to_tab(buf, "\n:");
-                print_arr(arr);
-                free(buf);
+                        print_arr(s.arr);
+                free((char *)s.buf);
                 return (0);
         }
-        buf = open_read("/home/rr/.config/today/todayrc");
-        if (!is_option(ac, av, buf) && ac > 2) {
+        head = str_to_list(s.arr);
+        if (!is_option(ac, av, &head) && ac > 2) {
                 write(2, "Wrong option !\n", 14);
                 return 1;
         }
-        free(buf);
+        free((char *)s.buf);
         return (0);
 }

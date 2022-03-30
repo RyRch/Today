@@ -2,9 +2,8 @@
 
 char    *ft_strdup(char *src)
 {
-        char	*new;
+        char	*new = NULL;
 
-        new = 0;
         new = malloc(sizeof(char) * ft_strlen(src) + 1);
         if (new == NULL)
                 return (NULL);

@@ -20,9 +20,8 @@ fclean:	clean
 	$(RM) $(NAME)
 
 install: all
-	mkdir /home/rr/.config/today
-	touch /home/rr/.config/today/todayrc
-	echo '0.0:test' > /home/rr/.config/today/todayrc
+	touch ~/.today
+	echo '0.0:open tdy' > ~/.today
 
 re: fclean all
 

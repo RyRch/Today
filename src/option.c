@@ -1,153 +1,78 @@
 #include "../icl/proto.h"
+#include <stdlib.h>
 
-char	*sort_index(char *buf)
+void    write_to_file(p_s *list)
 {
-	char **arr = str_to_tab(buf, "\n:");
-	char **tab = NULL;
-	int	x = 0;
-	char tmp = '0';
-	char *str = NULL;
+        char    *str = NULL;
+        int     fd = 0;
 
-	for (int i = 0; arr[i] != NULL; i++) {
-		if (i % 2 == 0) {
-			tab = str_to_tab(arr[i], ".");
-			tmp = x + '0';
-			tab[1] = ft_strcpy(&arr[i][2], &tmp);
-			arr[i] = NULL;
-			arr[i] = malloc(sizeof(char) * 1000);
-			ft_strcat(arr[i], tab[0]);
-			ft_strcat(arr[i], ".");
-			ft_strcat(arr[i], tab[1]);
-			x++;
-		}			
-	}
-	str = ft_strdup(tab_to_str(arr));
-	return (str);
+        str = list_to_str(list);
+		fd = open("/home/rr/.today", O_WRONLY | O_TRUNC);
+        str = ft_strdup(list_to_str(list));
+		write(fd, str, ft_strlen(str) + 1);
+		free(str); 
 }
 
-void    begin_opt(char *file, char *id)
+void    add_opt(p_s *list, char *task)
 {
-		char    **arr = NULL;
-		char    *str = NULL;
-		char    charset[3];
-		int     fd = 0;
+        p_s     *tmp = NULL;
 
-		ft_strcpy(charset, "\n:");
-		arr = str_to_tab(file, charset);
-		for (int y = 0; y < count_rows(file, charset); y++) {
-				if (y % 2 == 0 && arr[y][2] == id[0])
-						arr[y][0] = '1';
-		}
-		str = tab_to_str(arr);
-		free(*arr);
-		fd = open("/home/rr/.config/today/todayrc", O_WRONLY);
-		write(fd, str, ft_strlen(str));
-		free(str);
+        tmp = create_node(task, 0, 0);
+        tmp->next = list;
+        list = tmp;
+        sort_index(list);
+        write_to_file(list);
 }
 
-void    check_opt(char *file, char *id)
+void    status_opt(p_s *list, int status, char **av)
 {
-		char    **arr = NULL;
-		char    *str = NULL;
-		char    charset[3];
-		int     fd = 0;
+        p_s *tmp = list; 
+        p_s *head = tmp;
+        p_s *prev = tmp;
+        p_s *headp = prev;
+        int x = 0;
+        int dcheck = 0;
 
-		ft_strcpy(charset, "\n:");
-		arr = str_to_tab(file, "\n:");
-		for (int y = 0; y < count_rows(file, charset); y++) {
-				if (y % 2 == 0 && arr[y][2] == id[0])
-						arr[y][0] = '2';
-		}
-		str = tab_to_str(arr);
-		free(*arr);
-		fd = open("/home/rr/.config/today/todayrc", O_WRONLY);
-		write(fd, str, ft_strlen(str));
-		free(str);
+        while (tmp != NULL) {
+                for (int i = 2; av[i] != NULL; i++) {
+                        if (atoi(av[i]) == tmp->index && status == BEGIN)
+                                tmp->status = DOING;
+                        else if (atoi(av[i]) == tmp->index && status == CHECK)
+                                tmp->status = DONE;
+                        else if (tmp->index == atoi(av[i]) && status == DELETE) {
+                                prev->next = tmp->next;
+                                dcheck = 1;
+                        }
+                }
+                if (atoi(av[2]) == tmp->index && status == EDIT)
+                        tmp->task = ft_strdup(av[3]);
+                if (x >= 1)
+                        prev = prev->next;
+                tmp = tmp->next;
+                x++;
+        }
+        if (dcheck == 1)
+                head = headp;
+        sort_index(head);
+        write_to_file(head);
 }
 
-void    edit_opt(char *file, char *id, char *new)
-{
-		char    **arr = NULL;
-		char    *str = NULL;
-		int     fd = 0;
-
-		arr = str_to_tab(file, "\n:");
-		for (int y = 0; arr[y] != NULL; y++) {
-				if (ft_strncmp(&arr[y][2], id, ft_strlen(id))) {
-						arr[y + 1] = ft_strdup(new);
-						break;
-				}
-		}
-		str = tab_to_str(arr);
-		free(*arr);
-		fd = open("/home/rr/.config/today/todayrc", O_WRONLY | O_TRUNC);
-		write(fd, str, ft_strlen(str));
-		free(str);
-}
-
-void    add_opt(char *file, char *task)
-{
-		char    *new = NULL;
-		int     fd = 0;
-
-		new = malloc(sizeof(char) * ft_strlen(file) + ft_strlen(task) + 4);
-		ft_strcat(new, file);
-		ft_strcat(new, "0.0\n");
-		ft_strcat(new, task);
-		ft_strcat(new, "\n");
-		fd = open("/home/rr/.config/today/todayrc", O_WRONLY);
-		write(fd, sort_index(new), ft_strlen(new) + 1);
-		free(new); 
-}
-
-void	del_opt(char *file, char *id)
-{
-		char	*new = NULL;
-		int		rows = 0;
-		int		index = -1;
-		int		x = 0;
-		int		y = 0;
-		int		fd = 0;
-
-		new = malloc(sizeof(char) * ft_strlen(file));
-		for (int i = 0; file[i] != '\0'; i++) {
-				if (file[i] == ':' || file[i] == '\n')
-						rows++;
-				if (rows % 2 == 0 && ft_strncmp(&file[i + 2], id, ft_strlen(id))) {
-						index = i;
-						y = rows;
-				}
-				if (index != -1 && rows == y + 2)
-						x = i;
-		}
-		new = ft_strncpy(new, file, index + 2);
-		if (ft_strlen(&file[x]) > 3)
-			ft_strcat(new, &file[x]);
-		fd = open("/home/rr/.config/today/todayrc", O_WRONLY | O_TRUNC);
-		write(fd, sort_index(new), ft_strlen(new) + 2);
-		free(new);
-}
-
-bool    is_option(int ac, char **av, char *buf)
+bool    is_option(int ac, char **av, p_s **head)
 {
 		if (ac == 3 && ft_strcmp(av[1], "-a")) {
-				add_opt(buf, av[2]);
+				add_opt(*head, av[2]);
 				return true;
-		}
-		if (ac == 3 && ft_strcmp(av[1], "-b") && is_num(av[2])) {
-				begin_opt(buf, av[2]);
+		} else if (ft_strcmp(av[1], "-b")) {
+				status_opt(*head, BEGIN, av);
 				return true;
-		}
-		if (ac == 3 && ft_strcmp(av[1], "-c") && is_num(av[2])) {
-				check_opt(buf, av[2]);
+		} else if (ft_strcmp(av[1], "-c")) {
+				status_opt(*head, CHECK, av);
 				return true;
-		}
-		if (ac == 3 && ft_strcmp(av[1], "-d") && is_num(av[2])) {
-				del_opt(buf, av[2]);
+        } else if (ft_strcmp(av[1], "-d")) {
+			    status_opt(*head, DELETE, av);
 				return true;
-		}
-		if (ac == 4 && ft_strcmp(av[1], "-e") && is_num(av[2])) {
-				edit_opt(buf, av[2], av[3]);
+		} else if (ac == 4 && ft_strcmp(av[1], "-e")) {
+			    status_opt(*head, EDIT, av);
 				return true;
 		}
 		return false;
