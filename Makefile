@@ -21,7 +21,8 @@ fclean:	clean
 
 install: all
 	touch ~/.today
-	echo '0.0:open tdy' > ~/.today
+	echo '2.0:open tdy' > ~/.today
+	cp today /usr/bin
 
 re: fclean all
 
